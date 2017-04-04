@@ -1,0 +1,79 @@
+package com.webteam_rest.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.webteam_rest.controller.util.ServiceResponseUtils;
+import com.webteam_rest.model.UserCred;
+import com.webteam_rest.services.UserCredService;
+import com.webteam_rest.services.exception.BusinessServiceException;
+import com.webteam_rest.vo.ServiceResponse;
+
+@Controller
+
+@RequestMapping("/user")
+
+public class UserController {
+	@Autowired
+	UserCredService userService;
+	
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public  @ResponseBody
+	ServiceResponse userLogin(@RequestBody UserCred user) {
+		ServiceResponse serviceResponse = null;
+		try {
+			UserCred responseUser= userService.doGetUserByUsernamePassword(user.getUserName(), user.getPassword());
+			
+			if(responseUser!=null){
+				responseUser.setPassword(null);
+				serviceResponse =ServiceResponseUtils.dataResponse("1", "login success", responseUser);	
+			}else{
+				serviceResponse =ServiceResponseUtils.dataResponse("0", "invalid credentials", null);
+			}
+			
+			
+			
+		} catch (BusinessServiceException e) {
+			// e.printStackTrace();
+			serviceResponse =ServiceResponseUtils.dataResponse("0", e.toString(), null);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}catch(Throwable e){
+			e.printStackTrace();
+		}
+		return serviceResponse;
+
+	}
+	
+	@RequestMapping(value = "/enable/{id}", method = RequestMethod.GET)
+	public @ResponseBody ServiceResponse deleteCC( @PathVariable(value = "id") Long id) {
+		ServiceResponse serviceResponse = null;
+		try {
+			userService.doEnableUserCredById(id);
+			serviceResponse = ServiceResponseUtils.dataResponse("1", "user enabled successfully", null);
+
+		} catch (BusinessServiceException e) {
+			// e.printStackTrace();
+			serviceResponse = ServiceResponseUtils.dataResponse("0", e.toString(), null);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return serviceResponse;
+	}
+	
+
+
+	}
+	
+
