@@ -1,5 +1,6 @@
 package com.webteam_rest.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import com.webteam_rest.model.Job;
 import com.webteam_rest.model.JobSkill;
 import com.webteam_rest.model.Skill;
 import com.webteam_rest.services.exception.BusinessServiceException;
+import com.webteam_rest.vo.JobSkillsVO;
 
 @Service
 public class JobServiceImpl implements JobService {
@@ -54,14 +56,29 @@ public class JobServiceImpl implements JobService {
 	
 	@Override
 	@Transactional
-	public List<Job> doGetAllJobsByMaster(Long id) throws BusinessServiceException {
+	public List<JobSkillsVO> doGetAllJobsByMaster(Long id) throws BusinessServiceException {
 		List<Job> jobList = null;
+		List<JobSkill> jobSkillList = null;
+		List<JobSkillsVO> JobSkillsVOs = new ArrayList<JobSkillsVO>();
 		try {
 			jobList = jobDAO.getAllJobsByMaster(id);
+			jobSkillList = jobSkillDAO.getAllJobSkills();
+			for(Job job : jobList){
+				JobSkillsVO jobSkillsVO = new JobSkillsVO();
+				jobSkillsVO.setJob(job);
+				List<Skill> skills = new ArrayList<Skill>();
+				for(JobSkill jobSkill : jobSkillList){
+					if(job.getId().equals(jobSkill.getJob().getId())){
+						skills.add(jobSkill.getSkill());
+					}
+				}
+				jobSkillsVO.setSkills(skills);
+				JobSkillsVOs.add(jobSkillsVO);
+			}
 		} catch (DataServiceException dataServiceException) {
 			throw new BusinessServiceException(dataServiceException.getMessage(), dataServiceException);
 		}
-		return jobList;
+		return JobSkillsVOs;
 	}
 
 	@Override

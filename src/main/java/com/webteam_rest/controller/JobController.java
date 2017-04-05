@@ -18,6 +18,7 @@ import com.webteam_rest.services.JobService;
 import com.webteam_rest.services.exception.BusinessServiceException;
 import com.webteam_rest.util.FileUtil;
 import com.webteam_rest.util.StringUtil;
+import com.webteam_rest.vo.JobSkillsVO;
 import com.webteam_rest.vo.ServiceResponse;
 
 @Controller
@@ -79,8 +80,8 @@ public class JobController {
 	public @ResponseBody ServiceResponse getJobListByMaster(@PathVariable(value = "id") Long id) {
 		ServiceResponse serviceResponse = null;
 		try {
-			List<Job> jobList = jobService.doGetAllJobsByMaster(id);
-			serviceResponse = ServiceResponseUtils.dataResponse("1", "data retrived successfully", jobList);
+			List<JobSkillsVO> JobSkillsVOList = jobService.doGetAllJobsByMaster(id);
+			serviceResponse = ServiceResponseUtils.dataResponse("1", "data retrived successfully", JobSkillsVOList);
 
 		} catch (BusinessServiceException e) {
 			// e.printStackTrace();
