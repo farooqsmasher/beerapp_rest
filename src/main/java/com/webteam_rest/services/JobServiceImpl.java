@@ -28,10 +28,10 @@ public class JobServiceImpl implements JobService {
 	public void doSaveJob(Job job) throws BusinessServiceException {
 		try{
 			jobDAO.saveJob(job);
-			for(Skill skill:job.getSkills()){
+			for(JobSkill jobSkillIte:job.getJobSkills()){
 				JobSkill jobSkill =new JobSkill();
 				jobSkill.setJob(job);
-				jobSkill.setSkill(skill);
+				jobSkill.setSkill(jobSkillIte.getSkill());
 				jobSkillDAO.saveJobSkill(jobSkill);
 			}
 		}catch(DataServiceException dataServiceException){

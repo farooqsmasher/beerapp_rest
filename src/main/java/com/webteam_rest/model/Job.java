@@ -12,8 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 
 /**
@@ -45,8 +45,8 @@ public class Job implements Serializable {
 	@JoinColumn(name="master_id")
 	private Master master;
 	
-	@Transient
-	private List<Skill> skills;
+	@OneToMany(mappedBy="job")
+	private List<JobSkill> jobSkills;
 
 	public Long getId() {
 		return id;
@@ -97,13 +97,14 @@ public class Job implements Serializable {
 		this.master = master;
 	}
 
-	public List<Skill> getSkills() {
-		return skills;
+	public List<JobSkill> getJobSkills() {
+		return jobSkills;
 	}
 
-	public void setSkills(List<Skill> skills) {
-		this.skills = skills;
+	public void setJobSkills(List<JobSkill> jobSkills) {
+		this.jobSkills = jobSkills;
 	}
+
 	
 	
 
