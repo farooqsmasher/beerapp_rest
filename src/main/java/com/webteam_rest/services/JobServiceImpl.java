@@ -43,15 +43,29 @@ public class JobServiceImpl implements JobService {
 
 	@Override
 	@Transactional
-	public List<Job> doGetAllJobs() throws BusinessServiceException {
+	public List<JobSkillsVO> doGetAllJobs() throws BusinessServiceException {
 		List<Job> jobList = null;
+		List<JobSkill> jobSkillList = null;
+		List<JobSkillsVO> JobSkillsVOs = new ArrayList<JobSkillsVO>();
 		try {
 			jobList = jobDAO.getAllJobs();
-
+			jobSkillList = jobSkillDAO.getAllJobSkills();
+			for(Job job : jobList){
+				JobSkillsVO jobSkillsVO = new JobSkillsVO();
+				jobSkillsVO.setJob(job);
+				List<Skill> skills = new ArrayList<Skill>();
+				for(JobSkill jobSkill : jobSkillList){
+					if(job.getId().equals(jobSkill.getJob().getId())){
+						skills.add(jobSkill.getSkill());
+					}
+				}
+				jobSkillsVO.setSkills(skills);
+				JobSkillsVOs.add(jobSkillsVO);
+			}
 		} catch (DataServiceException dataServiceException) {
 			throw new BusinessServiceException(dataServiceException.getMessage(), dataServiceException);
 		}
-		return jobList;
+		return JobSkillsVOs;
 	}
 	
 	@Override

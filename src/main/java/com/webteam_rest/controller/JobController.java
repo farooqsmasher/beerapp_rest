@@ -60,7 +60,7 @@ public class JobController {
 	public @ResponseBody ServiceResponse getCourierBoys() {
 		ServiceResponse serviceResponse = null;
 		try {
-			List<Job> jobList = jobService.doGetAllJobs();
+			List<JobSkillsVO> jobList = jobService.doGetAllJobs();
 			serviceResponse = ServiceResponseUtils.dataResponse("1", "data retrived successfully", jobList);
 
 		} catch (BusinessServiceException e) {

@@ -9,7 +9,7 @@ import com.webteam_rest.vo.JobSkillsVO;
 public interface JobService {
 	
 	void doSaveJob(Job job) throws BusinessServiceException;
-	List<Job> doGetAllJobs() throws BusinessServiceException;
+	List<JobSkillsVO> doGetAllJobs() throws BusinessServiceException;
 	Job dogetAllJobsById(Long Id) throws BusinessServiceException;
 	void doUpdate (Job job) throws BusinessServiceException;
 	void doDelete (Job job) throws BusinessServiceException;
