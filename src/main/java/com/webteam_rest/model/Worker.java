@@ -42,6 +42,17 @@ public class Worker implements Serializable {
 	@Column(name="address")
 	private String address;
 	
+	@Column(name="country")
+	private String country;
+	
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private UserCred user;

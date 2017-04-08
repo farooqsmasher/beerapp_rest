@@ -31,6 +31,9 @@ public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
     response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
     response.setHeader("Access-Control-Max-Age", "3600");
     response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
+    response.setHeader("token", "*");
+    response.setHeader("user", "*");
+    
 
     chain.doFilter(req, res);
 }

@@ -10,6 +10,7 @@ public interface WorkerDAO {
 	void saveWorker(Worker worker) throws DataServiceException;
 	List<Worker> getAllWorkers() throws DataServiceException;
 	Worker getAllworkerById(Long id) throws DataServiceException;
+	Worker getAllworkerByUserId(Long userId) throws DataServiceException;
 	void update (Worker worker) throws DataServiceException;
 	void delete (Worker worker) throws DataServiceException;
 	

@@ -10,6 +10,7 @@ public interface MasterDAO {
 	public void saveMaster(Master master) throws DataServiceException;
 	List<Master> getAllMasters() throws DataServiceException;
 	Master getAllMastersById(Long id) throws DataServiceException;
+	Master getAllMastersByUserId(Long userId) throws DataServiceException;
 	void updateMaster (Master master) throws DataServiceException;
 	void delete (Master master) throws DataServiceException;
 	

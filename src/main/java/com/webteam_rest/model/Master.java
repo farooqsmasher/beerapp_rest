@@ -40,9 +40,20 @@ public class Master implements Serializable {
 	@Column(name="full_name")
 	private String fullName;
 	
+	@Column(name="country")
+	private String country;
+	
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private UserCred user;
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
 
 	public Long getId() {
 		return id;

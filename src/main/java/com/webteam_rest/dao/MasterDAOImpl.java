@@ -6,9 +6,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.webteam_rest.dao.exception.DataServiceException;
-import com.webteam_rest.model.Job;
 import com.webteam_rest.model.Master;
 
 @Repository
@@ -64,6 +64,24 @@ public class MasterDAOImpl implements MasterDAO{
 	public void delete(Master master) throws DataServiceException {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	@Transactional
+	public Master getAllMastersByUserId(Long userId) throws DataServiceException {
+		try {
+
+			List<Master> list = this.sessionFactory.getCurrentSession().createQuery(" From Master m  where m.user.id=" + userId)
+					.getResultList();
+
+			for (Master master : list) {
+				return master;
+			}
+		} catch (DataAccessException e) {
+			throw new DataServiceException("data retrieval fail", e);
+		}
+		return null;
+
 	}
 	
 

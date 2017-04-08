@@ -6,9 +6,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.webteam_rest.dao.exception.DataServiceException;
-import com.webteam_rest.model.Job;
 import com.webteam_rest.model.Worker;
 
 @Repository
@@ -61,6 +61,23 @@ public class WorkerDAOImpl implements WorkerDAO{
 	public void delete(Worker worker) throws DataServiceException {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	@Transactional
+	public Worker getAllworkerByUserId(Long userId) throws DataServiceException {
+		try {
+
+			List<Worker> list = this.sessionFactory.getCurrentSession().createQuery(" From Worker w  where w.user.id=" + userId)
+					.getResultList();
+
+			for (Worker worker : list) {
+				return worker;
+			}
+		} catch (DataAccessException e) {
+			throw new DataServiceException("data retrieval fail", e);
+		}
+		return null;
 	}
 
 }
