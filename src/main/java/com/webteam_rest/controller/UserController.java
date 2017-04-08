@@ -10,10 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.webteam_rest.controller.util.ServiceResponseUtils;
+import com.webteam_rest.dao.UserTokenDAO;
 import com.webteam_rest.model.UserCred;
+import com.webteam_rest.model.UserToken;
 import com.webteam_rest.services.UserCredService;
 import com.webteam_rest.services.exception.BusinessServiceException;
+import com.webteam_rest.util.StringUtil;
 import com.webteam_rest.vo.ServiceResponse;
+import com.webteam_rest.vo.UserVO;
 
 @Controller
 
@@ -22,39 +26,49 @@ import com.webteam_rest.vo.ServiceResponse;
 public class UserController {
 	@Autowired
 	UserCredService userService;
-	
-	
+
+	@Autowired
+	UserTokenDAO userTokenDAO;
+
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public  @ResponseBody
-	ServiceResponse userLogin(@RequestBody UserCred user) {
+	public @ResponseBody ServiceResponse userLogin(@RequestBody UserCred user) {
 		ServiceResponse serviceResponse = null;
 		try {
-			UserCred responseUser= userService.doGetUserByUsernamePassword(user.getUserName(), user.getPassword());
-			
-			if(responseUser!=null){
+			UserVO userVO = new UserVO();
+			UserCred responseUser = userService.doGetUserByUsernamePassword(user.getUserName(), user.getPassword());
+			userVO.setUser(responseUser);
+			if (responseUser != null) {
+				UserToken userToken = new UserToken();
+				userToken.setUserId(responseUser.getId());
+				StringUtil stringUtil = new StringUtil();
+				userToken.setToken(stringUtil.getUniqueString());
+				try {
+					userTokenDAO.saveUserToken(userToken);
+					userVO.setToken(userToken.getToken());
+				} catch (Exception ee) {
+
+				}
 				responseUser.setPassword(null);
-				serviceResponse =ServiceResponseUtils.dataResponse("1", "login success", responseUser);	
-			}else{
-				serviceResponse =ServiceResponseUtils.dataResponse("0", "invalid credentials", null);
+				serviceResponse = ServiceResponseUtils.dataResponse("1", "login success", userVO);
+			} else {
+				serviceResponse = ServiceResponseUtils.dataResponse("0", "invalid credentials", null);
 			}
-			
-			
-			
+
 		} catch (BusinessServiceException e) {
 			// e.printStackTrace();
-			serviceResponse =ServiceResponseUtils.dataResponse("0", e.toString(), null);
-			
-		}catch(Exception e){
+			serviceResponse = ServiceResponseUtils.dataResponse("0", e.toString(), null);
+
+		} catch (Exception e) {
 			e.printStackTrace();
-		}catch(Throwable e){
+		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 		return serviceResponse;
 
 	}
-	
+
 	@RequestMapping(value = "/enable/{id}", method = RequestMethod.GET)
-	public @ResponseBody ServiceResponse deleteCC( @PathVariable(value = "id") Long id) {
+	public @ResponseBody ServiceResponse deleteCC(@PathVariable(value = "id") Long id) {
 		ServiceResponse serviceResponse = null;
 		try {
 			userService.doEnableUserCredById(id);
@@ -71,9 +85,20 @@ public class UserController {
 		}
 		return serviceResponse;
 	}
-	
 
+	@RequestMapping(value = "/logout/{userId}", method = RequestMethod.GET)
+	public @ResponseBody ServiceResponse logout(@PathVariable(value = "userId") Long id) {
+		ServiceResponse serviceResponse = null;
+		try {
+			userTokenDAO.deleteUserToken(id);
+			serviceResponse = ServiceResponseUtils.dataResponse("1", "user logout successfully", null);
 
+		} catch (Exception e) {
+			serviceResponse = ServiceResponseUtils.dataResponse("0", e.toString(), null);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return serviceResponse;
 	}
-	
 
+}

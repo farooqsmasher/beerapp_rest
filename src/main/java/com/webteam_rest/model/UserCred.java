@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 /**
@@ -36,7 +37,8 @@ public class UserCred implements Serializable {
 	
 	@Column(name="enable")
 	private Integer enable;
-
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -76,6 +78,7 @@ public class UserCred implements Serializable {
 	public void setEnable(Integer enable) {
 		this.enable = enable;
 	}
-	
+
+		
 	
 }

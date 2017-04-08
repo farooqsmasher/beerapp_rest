@@ -8,7 +8,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.webteam_rest.dao.exception.DataServiceException;
-import com.webteam_rest.model.Job;
 import com.webteam_rest.model.UserCred;
 
 @Repository
