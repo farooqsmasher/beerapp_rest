@@ -43,7 +43,7 @@ public class WorkerServiceImpl implements WorkerService {
 		try{
 			worker.getUser().setUserName(worker.getEmailId());
 			worker.getUser().setEnable(0);
-			worker.getUser().setRole("M");
+			worker.getUser().setRole("W");
 			userCredDAO.saveUserCred(worker.getUser());
 			workerDAO.saveWorker(worker);
 			EmailUtil emailUtil = new EmailUtil();
