@@ -21,8 +21,10 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		UserToken userToken= new UserToken();
 		UserToken finalUserToken= null;
+		request.getHeaderNames();
 		String user = request.getHeader("user");
 		String token = request.getHeader("token");
+		if(user!=null){
 		Long userId = Long.valueOf(user);
 		userToken.setUserId(userId);
 		userToken.setToken(token);
@@ -32,6 +34,9 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		}else{
 			return true;
+		}
+		}else{
+			return false;
 		}
 		
 	}
