@@ -13,4 +13,5 @@ public interface UserCredService {
 	UserCred doGetUserCredById(Long id) throws BusinessServiceException;
 	void doEnableUserCredById(Long id) throws BusinessServiceException;
 	UserCred doGetUserByUsernamePassword(String userName, String password) throws BusinessServiceException;
+	UserCred doGetUserByUsername(String userName) throws BusinessServiceException;
 }

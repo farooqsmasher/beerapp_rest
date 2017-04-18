@@ -11,4 +11,5 @@ public interface UserCredDAO {
 	List<UserCred> getAllUserCred() throws DataServiceException;
 	UserCred getUserCredById(Long id) throws DataServiceException;
 	UserCred getUserByUsernamePassword(String userName, String password) throws DataServiceException;
+	UserCred getUserByUsername(String userName) throws DataServiceException;
 }
