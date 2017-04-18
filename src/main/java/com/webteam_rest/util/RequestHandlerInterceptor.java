@@ -36,6 +36,8 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter {
 			return true;
 		}
 		}else{
+			if(!request.getMethod().equalsIgnoreCase("options"))
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			return false;
 		}
 		
