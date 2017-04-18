@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.webteam_rest.dao.exception.DataServiceException;
 import com.webteam_rest.model.UserCred;
@@ -64,26 +63,6 @@ public class UserCredDAOImpl implements UserCredDAO {
 			throw new DataServiceException("data retrieval fail", e);
 		}
 		return null;
-	}
-
-	@Override
-	@Transactional
-	public UserCred getUserByUsername(String userName) throws DataServiceException {
-		try {
-
-			List<UserCred> list = this.sessionFactory.getCurrentSession()
-					.createQuery(
-							" From UserCred u where u.userName='" + userName + "'")
-					.getResultList();
-
-			for (UserCred userCred : list) {
-				return userCred;
-			}
-		} catch (DataAccessException e) {
-			throw new DataServiceException("data retrieval fail", e);
-		}
-		return null;
-
 	}
 
 }
