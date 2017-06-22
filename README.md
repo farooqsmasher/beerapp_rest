@@ -1,6 +1,11 @@
-https://github.com/farooqsmasher/beerapp/blob/master/beerapp.sql
+
 # Beerapp_rest
 Sample Beerapp
+# Deployed On Openstack(ubuntu trusthy)
+Front-end:http://87.44.4.185/#/
+
+Backend(Restapi):http://87.44.4.185:8080/beerapp_rest/
+
 
 # Resources
 - [REST With Spring] (http://bit.ly/restwithspring)
