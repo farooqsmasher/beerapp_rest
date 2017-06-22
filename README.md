@@ -6,7 +6,7 @@ Sample Beerapp
 - [REST With Spring] (http://bit.ly/restwithspring)
 # Quick Start
 ```
-git clone https://github.com/eugenp/REST-With-Spring.git
+git clone https://github.com/farooqsmasher/beerapp_rest.git
 cd REST-With-Spring
 mvn clean install
 mvn cargo:run -f um-webapp/pom.xml
@@ -51,7 +51,7 @@ And other user api is been implemented
 
 # future implementation
 Security can be achived by using tokens or implementing Spring auth2
-conversion of Dto to Entity vice versa can be implemented based on requiremented
+conversion of Dto to Entity vice versa can be implemented based on requirements
 
 # front-end 
 -** Angularjs**:(https://angularjs.org/)
