@@ -1,4 +1,4 @@
-
+https://github.com/farooqsmasher/beerapp/blob/master/beerapp.sql
 # Beerapp_rest
 Sample Beerapp
 
