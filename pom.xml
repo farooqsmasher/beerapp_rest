@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>webteam_rest</groupId>
-	<artifactId>webteam_rest</artifactId>
+	<groupId>beerapp_rest</groupId>
+	<artifactId>beerapp_rest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>webteam_rest</name>
+	<name>beerapp_rest</name>
 	<description>Restfull application with single page application</description>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -14,7 +14,7 @@
 		<hibernate.version>5.2.4.Final</hibernate.version>
 		<log4j.version>1.2.17</log4j.version>
 		<jdk.version>1.8</jdk.version>
-		<context.path>webteam_rest</context.path>
+		<context.path>beerapp_rest</context.path>
 	</properties>
 	<build>
 		<finalName>${pom.artifactId}</finalName>

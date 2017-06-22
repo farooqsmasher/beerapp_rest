@@ -10,13 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.webteam_rest.controller.util.ServiceResponseUtils;
-import com.webteam_rest.dao.MasterDAO;
 import com.webteam_rest.dao.UserTokenDAO;
-import com.webteam_rest.dao.WorkerDAO;
-import com.webteam_rest.model.Master;
 import com.webteam_rest.model.UserCred;
 import com.webteam_rest.model.UserToken;
-import com.webteam_rest.model.Worker;
 import com.webteam_rest.services.UserCredService;
 import com.webteam_rest.services.exception.BusinessServiceException;
 import com.webteam_rest.util.StringUtil;
@@ -34,11 +30,7 @@ public class UserController {
 	@Autowired
 	UserTokenDAO userTokenDAO;
 	
-	@Autowired
-	MasterDAO masterDAO;
 	
-	@Autowired
-	WorkerDAO workerDAO;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ServiceResponse userLogin(@RequestBody UserCred user) {
@@ -52,17 +44,7 @@ public class UserController {
 				userToken.setUserId(responseUser.getId());
 				StringUtil stringUtil = new StringUtil();
 				userToken.setToken(stringUtil.getUniqueString());
-				try{
-					if(responseUser.getRole().equalsIgnoreCase("M")){
-						Master master = masterDAO.getAllMastersByUserId(responseUser.getId());
-						userVO.setMaster(master);
-					}else{
-						Worker worker = workerDAO.getAllworkerByUserId(responseUser.getId());
-						userVO.setWorker(worker);
-					}
-				}catch(Exception ee){
-					
-				}
+			
 				try {
 					userTokenDAO.saveUserToken(userToken);
 					userVO.setToken(userToken.getToken());
