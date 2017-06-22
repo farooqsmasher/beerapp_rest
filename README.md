@@ -17,6 +17,15 @@ mvn clean install
 mvn cargo:run -f um-webapp/pom.xml
 
 ```
+
+```
+# Apis Build
+**http://87.44.4.185:8080/beerapp_rest/product/list  (List all the Product details)
+http://87.44.4.185:8080/beerapp_rest/product/Save   (Post/saves the Product details)
+http://87.44.4.185:8080/beerapp_rest/product/list/{id} (List product by Id)**
+
+And other user api is been implemented
+```
 # Persistence
 By default, the project uses [the MYSQL in-memory DB](https://dev.mysql.com/downloads/) and - `persistence-h2.properties`.
 
@@ -47,12 +56,7 @@ The project uses the following technologies: <br/>
 - see the [Eclipse wiki page](https://github.com/eugenp/REST-With-Spring/wiki/Eclipse:-Setup-and-Configuration) of this project
 
 
-# Apis Build
-**http://87.44.4.185:8080/beerapp_rest/product/list  (List all the Product details)
-http://87.44.4.185:8080/beerapp_rest/product/Save   (Post/saves the Product details)
-http://87.44.4.185:8080/beerapp_rest/product/list/{id} (List product by Id)**
 
-And other user api is been implemented
 
 # future implementation
 Security can be achived by using tokens or implementing Spring auth2
