@@ -18,14 +18,14 @@ mvn cargo:run -f um-webapp/pom.xml
 
 ```
 
-```
+
 # Apis Build
 **http://87.44.4.185:8080/beerapp_rest/product/list  (List all the Product details)
 http://87.44.4.185:8080/beerapp_rest/product/Save   (Post/saves the Product details)
 http://87.44.4.185:8080/beerapp_rest/product/list/{id} (List product by Id)**
 
 And other user api is been implemented
-```
+
 # Persistence
 By default, the project uses [the MYSQL in-memory DB](https://dev.mysql.com/downloads/) and - `persistence-h2.properties`.
 
