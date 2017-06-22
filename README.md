@@ -48,9 +48,9 @@ The project uses the following technologies: <br/>
 
 
 # Apis Build
-**http://localhost:Yourport/beerapp_rest/product/list  (List all the Product details)
-http://localhost:Yourport/beerapp_rest/product/Save   (Post/saves the Product details)
-http://localhost:Yourport/beerapp_rest/product/list/{id} (List product by Id)**
+**http://87.44.4.185:8080/beerapp_rest/product/list  (List all the Product details)
+http://87.44.4.185:8080/beerapp_rest/product/Save   (Post/saves the Product details)
+http://87.44.4.185:8080/beerapp_rest/product/list/{id} (List product by Id)**
 
 And other user api is been implemented
 
